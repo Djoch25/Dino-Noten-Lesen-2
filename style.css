@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "Bravura";
+    src: url("./fonts/Bravura.woff2") format("woff2");
+}
+
+.bravura {
+    font-family: "Bravura";
+}
+
+#footer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+
+    z-index: 999999;
+
+    color: white;
+    font-size: 12px;
+}
