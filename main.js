@@ -87,7 +87,6 @@ const mainLoop = () => {
 		dino.toDeath();
 
 		GuiButton.destroy(backBtn, pauseBtn);
-		stopMic();
 	}
 
 	if (currentMidiPitch === midiNoteSet[midiTargetIndex]) {
