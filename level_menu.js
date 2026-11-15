@@ -18,6 +18,8 @@ const createArcadiaMenu = () => {
 
 	document.body.appendChild(pswInput);
 
+	mainCtx.fillText("A", 50, 50);
+
 	try {
 	const keyboard = new Keyboard(pswInput);
 	
