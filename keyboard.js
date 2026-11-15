@@ -7,7 +7,7 @@ class Keyboard {
 
     this.btnW = this.w / 11;
     this.btnH = this.btnW;
-    this.xOffset = this.btnW / 2;
+    this.xOffset = -this.btnW / 2;
     this.yOffset = this.btnH / 2;
 
     const letters = [
