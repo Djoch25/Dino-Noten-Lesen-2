@@ -16,23 +16,36 @@ const createScaleMenu = () => {
 	}	
 }
 
-const createDinoOverviewRoom = () => {
+const createDinoOverviewRoom = async() => {
+	await document.fonts.load("250px Bravura");
+
 	document.documentElement.style.backgroundColor = BACKGROUND_COLOR;
 	document.body.style.backgroundColor = BACKGROUND_COLOR;
 
+	mainCtx.fillStyle = "#000000";
+	mainCtx.font = "250px Bravura";
+	mainCtx.fillText("\ue050", WIDTH * 0.1, HEIGHT * 0.78);
+
+	const lineSpacing = HEIGHT * 0.12;
+	for (let i = 0; i < 5; i++)	mainCtx.fillRect(0, HEIGHT * 0.9 - lineSpacing * i, WIDTH, 5);
+
 	const dinoW = WIDTH * 0.5;
-	mainCtx.drawImage(dinoOverviewImg, WIDTH * 0.5, HEIGHT * 0.1, dinoW, dinoW * 478 / 522);
+	mainCtx.drawImage(dinoOverviewImg, WIDTH * 0.5, HEIGHT * 0.15, dinoW, dinoW * 478 / 522);
+
+	mainCtx.fillStyle = "#ffff33";
+	mainCtx.font = 100 * SCALE + "px Arial";
+	mainCtx.fillText("DINO NOTEN LESEN", WIDTH * 0.5, HEIGHT * 0.15);
 
 	const btns = [];
-	const btnX = SCREEN_WIDTH * 0.25;
-	const btnY = SCREEN_HEIGHT * 0.15;
+	const btnX = SCREEN_WIDTH * 0.3;
+	const btnY = SCREEN_HEIGHT * 0.27;
 	const btnW = SCREEN_WIDTH * 0.1;
-	const spacing = SCREEN_WIDTH * 0.12;
+	const spacing = SCREEN_HEIGHT * 0.2;
 	let i = 0;
 	
-	btns.push(new GuiButton("ARCADIA", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS));
-	btns.push(new GuiButton("TRAINING", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS));
-	btns.push(new GuiButton("WIE FUNKTIONIERT", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS));
+	btns.push(new GuiButton("ARCADIA", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS, 0.9));
+	btns.push(new GuiButton("TRAINING", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS, 0.9));
+	btns.push(new GuiButton("WIE\nFUNKTIONIERT", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS, 0.7));
 	btns.push(new GuiButton("", btnX, btnY + i++ * spacing, btnW, btnW, document.body, SETTING_BUTTON_IMAGE_COORDS));
 
 	btns[0].addEventListener("click", () => {
@@ -117,11 +130,11 @@ const createRulesMenu = (ctx) => {
 const createSettingsMenu = (settings) => {
 	const btnSets = [];
 
-	btnSets[0] = new ButtonSet(["30 s", "45 s", "60 s", "90 s", "120 s"], WIDTH * 0.1, HEIGHT * 0.5, WIDTH * 0.1, WIDTH * 0.1, "Arial");
+	btnSets[0] = new ButtonSet(["30 s", "45 s", "60 s", "90 s", "120 s"], SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.5, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, "Arial");
 	btnSets[0].turnOffAll();
 	btnSets[0].turnOn(settings.timeIndex);
 
-	btnSets[1] = new ButtonSet(["\ue1d2", "\ue1d3", "\ue1d5", "\ue1d7", "MIX"], WIDTH * 0.1, HEIGHT * 0.75, WIDTH * 0.1, WIDTH * 0.1, "Bravura")
+	btnSets[1] = new ButtonSet(["\ue1d2", "\ue1d3", "\ue1d5", "\ue1d7", "MIX"], SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.75, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, "Bravura")
 	btnSets[1].turnOffAll();
 	btnSets[1].turnOn(settings.durationIndex);
 
@@ -182,3 +195,5 @@ const starter = () => {
 };
 
 starter();
+
+//const keyboard = new Keyboard(SCREEN_WIDTH, SCREEN_HEIGHT);
