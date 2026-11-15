@@ -89,7 +89,7 @@ const mainLoop = () => {
 		GuiButton.destroy(backBtn, pauseBtn);
 	}
 
-	if (currentMidiPitch === midiNoteSet[midiTargetIndex]) {
+	if (level.staveNumber === 1 && currentMidiPitch === midiNoteSet[midiTargetIndex]) {
 		if (midiNoteSet[midiTargetIndex] === midiNoteSet[midiTargetIndex + 1]) {
 			workletNode.port.postMessage("stopYinDetection");
 		}
@@ -190,7 +190,7 @@ const endgameLoop = () => {
 		fadingCtx.fillText(punteggioTotale, WIDTH / 2 - punteggioW2, HEIGHT / 4 + punteggioH2);
 	
 		if (level.category === "arcadia") {
-			drawStars(fadingCtx, starNumber, (WIDTH - STAR_ROW_WIDTH) * 0.5, HEIGHT * 0.35);
+			drawStars(fadingCtx, starNumber, (WIDTH - STAR_ROW_WIDTH * SCALE) * 0.5, HEIGHT * 0.35 / SCALE);
 
 			if (levelCleared) {
 				fadingCtx.font = (SCORE_FONT_SIZE * 0.65) + "px Arial";
