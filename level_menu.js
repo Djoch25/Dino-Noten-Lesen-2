@@ -3,28 +3,31 @@ const createArcadiaMenu = () => {
 	mainCtx.font = 100 * SCALE + "px Arial";
 	mainCtx.fillText("ARCADIA MODE", WIDTH * 0.5, HEIGHT * 0.15);
 	mainCtx.font = 40 * SCALE + "px Arial";
-	mainCtx.fillText("LEVEL PASSWORT HINZUFÜGEN:", WIDTH * 0.5, HEIGHT * 0.35);
+	mainCtx.fillText("LEVEL PASSWORT HINZUFÜGEN:", WIDTH * 0.5, HEIGHT * 0.25);
 
-	const pswInput = document.createElement("input");
+	const pswInput = document.createElement("span");
 	const w = SCREEN_WIDTH * 0.3;
 	pswInput.style.position = "absolute";
 	pswInput.style.left = (SCREEN_WIDTH - w) * 0.5 + "px";
-	pswInput.style.top = SCREEN_HEIGHT * 0.5 + "px";
+	pswInput.style.top = SCREEN_HEIGHT * 0.35 + "px";
 	pswInput.style.width = w + "px";
 	pswInput.style.height = SCREEN_HEIGHT * 0.075 + "px";
 	pswInput.style.backgroundColor = "#aaff55";
 	pswInput.style.color = "#995500";
-	pswInput.style.font = mainCtx.font;
+	pswInput.style.font = "40px Arial";
 
 	document.body.appendChild(pswInput);
 
-	const backBtn = new GuiButton("", SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.7, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, BACK_BUTTON_IMAGE_COORDS);
-	const forwardBtn = new GuiButton("", SCREEN_WIDTH * 0.6, SCREEN_HEIGHT * 0.7, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, FORWARD_BUTTON_IMAGE_COORDS);
-	const skipBtn = new GuiButton("SKIP", SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.7, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, NORMAL_BUTTON_IMAGE_COORDS);
+	const keyboard = new Keyboard(pswInput);
+
+	const backBtn = new GuiButton("", SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, BACK_BUTTON_IMAGE_COORDS);
+	const forwardBtn = new GuiButton("", SCREEN_WIDTH * 0.9, SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, FORWARD_BUTTON_IMAGE_COORDS);
+	const skipBtn = new GuiButton("SKIP", SCREEN_WIDTH * 0.9, SCREEN_HEIGHT * 0.3, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, NORMAL_BUTTON_IMAGE_COORDS);
 
 	backBtn.addEventListener("click", () => {
 		GuiButton.destroy(backBtn, forwardBtn, skipBtn);
 		pswInput.remove();
+		keyboard.destroy();
 		mainCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
 		createDinoOverviewRoom();
@@ -33,12 +36,12 @@ const createArcadiaMenu = () => {
 	let level = 1;
 
 	forwardBtn.addEventListener("click", () => {
-		const psw = pswInput.value.trim().toUpperCase();
+		const psw = pswInput.textContent;
 
 		if (psw === "") {
-			mainCtx.clearRect(0, HEIGHT * 0.375, WIDTH, HEIGHT * 0.1);
+			mainCtx.clearRect(0, HEIGHT * 0.275, WIDTH, HEIGHT * 0.1);
 			mainCtx.fillStyle = "#ff0000";
-			mainCtx.fillText("Keine Passwort hinzugefügt!", WIDTH * 0.5, HEIGHT * 0.425);
+			mainCtx.fillText("Keine Passwort hinzugefügt!", WIDTH * 0.5, HEIGHT * 0.325);
 
 			return;
 		}
@@ -56,19 +59,21 @@ const createArcadiaMenu = () => {
 		if (pswCorrect) {
 			GuiButton.destroy(backBtn, forwardBtn, skipBtn);
 			pswInput.remove();
+			keyboard.destroy();
 			mainCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
 			createLevelMenu(level);
 		} else {
 			mainCtx.fillStyle = "#ff0000";
-			mainCtx.clearRect(0, HEIGHT * 0.375, WIDTH, HEIGHT * 0.1);
-			mainCtx.fillText("Dieses Passwort ist falsch!", WIDTH * 0.5, HEIGHT * 0.425);
+			mainCtx.clearRect(0, HEIGHT * 0.275, WIDTH, HEIGHT * 0.1);
+			mainCtx.fillText("Dieses Passwort ist falsch!", WIDTH * 0.5, HEIGHT * 0.325);
 		}
 	});
 
 	skipBtn.addEventListener("click", () => {
 		GuiButton.destroy(backBtn, forwardBtn, skipBtn);
 			pswInput.remove();
+			keyboard.destroy();
 			mainCtx.clearRect(0, 0, WIDTH, HEIGHT);
 
 		createLevelMenu(1);
@@ -99,6 +104,10 @@ const createLevelMenu = (level) => {
 		}
 	}
 
+	for (const btn of levelBtns) {
+		btn.btn.style.fontSize = levelBtns[24].btn.style.fontSize;
+	}
+
 	const backBtn = new GuiButton("", xSpacing, ySpacing, ySpacing, ySpacing, document.body, BACK_BUTTON_IMAGE_COORDS);
 
 	backBtn.addEventListener("click", () => {
@@ -109,27 +118,35 @@ const createLevelMenu = (level) => {
 }
 
 const createTrainingMenu = () => {
+	mainCtx.fillStyle = "#ffff33";
+	mainCtx.font = 100 * SCALE + "px Arial";
+	mainCtx.fillText("TRAINING MODE", WIDTH * 0.5, HEIGHT * 0.15);
+	
 	const btns = [];
 
-	btns[0] = new GuiButton("HAND\nLAGEN", SCREEN_WIDTH * 0.33, SCREEN_HEIGHT * 0.33, SCREEN_WIDTH * 0.2, SCREEN_WIDTH * 0.15, document.body, NORMAL_BUTTON_IMAGE_COORDS);
-	btns[1] = new GuiButton("RANGE", SCREEN_WIDTH * 0.67, SCREEN_HEIGHT * 0.33, SCREEN_WIDTH * 0.2, SCREEN_WIDTH * 0.15, document.body, NORMAL_BUTTON_IMAGE_COORDS);
-	btns[2] = new GuiButton("TONARTEN", SCREEN_WIDTH * 0.33, SCREEN_HEIGHT * 0.67, SCREEN_WIDTH * 0.2, SCREEN_WIDTH * 0.15, document.body, NORMAL_BUTTON_IMAGE_COORDS);
-	btns[3] = new GuiButton("INTERVALLE", SCREEN_WIDTH * 0.67, SCREEN_HEIGHT * 0.67, SCREEN_WIDTH * 0.2, SCREEN_WIDTH * 0.15, document.body, NORMAL_BUTTON_IMAGE_COORDS);
+	btns[0] = new GuiButton("HAND\nLAGEN", SCREEN_WIDTH * 0.33, SCREEN_HEIGHT * 0.4, SCREEN_WIDTH * 0.2, SCREEN_WIDTH * 0.15, document.body, NORMAL_BUTTON_IMAGE_COORDS);
+	btns[1] = new GuiButton("RANGE", SCREEN_WIDTH * 0.67, SCREEN_HEIGHT * 0.4, SCREEN_WIDTH * 0.2, SCREEN_WIDTH * 0.15, document.body, NORMAL_BUTTON_IMAGE_COORDS);
+	btns[2] = new GuiButton("TONARTEN", SCREEN_WIDTH * 0.33, SCREEN_HEIGHT * 0.75, SCREEN_WIDTH * 0.2, SCREEN_WIDTH * 0.15, document.body, NORMAL_BUTTON_IMAGE_COORDS);
+	btns[3] = new GuiButton("INTERVALLE", SCREEN_WIDTH * 0.67, SCREEN_HEIGHT * 0.75, SCREEN_WIDTH * 0.2, SCREEN_WIDTH * 0.15, document.body, NORMAL_BUTTON_IMAGE_COORDS);
 
 	btns[0].addEventListener("click", () => {
+		mainCtx.clearRect(0, 0, WIDTH, HEIGHT);
 		GuiButton.destroy(backBtn, ...btns);
 		createHandPositionMenu();
 	});
 	btns[1].addEventListener("click", async() => {
+		mainCtx.clearRect(0, 0, WIDTH, HEIGHT);
 		GuiButton.destroy(backBtn, ...btns);
 		createRangeMenu(); 
 	});
 
 	btns[2].addEventListener("click", () => {
+		mainCtx.clearRect(0, 0, WIDTH, HEIGHT);
 		GuiButton.destroy(backBtn, ...btns);
 		createTonalityMenu();
 	});
 	btns[3].addEventListener("click", () => {
+		mainCtx.clearRect(0, 0, WIDTH, HEIGHT);
 		GuiButton.destroy(backBtn, ...btns);
 		createIntervalMenu();
 	});
@@ -137,8 +154,8 @@ const createTrainingMenu = () => {
 	const backBtn = new GuiButton("", SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, BACK_BUTTON_IMAGE_COORDS);
 
 	backBtn.addEventListener("click", () => {
+		mainCtx.clearRect(0, 0, WIDTH, HEIGHT);
 		GuiButton.destroy(backBtn, ...btns);
-
 		createDinoOverviewRoom();
 	});
 }
@@ -149,6 +166,8 @@ const createHandPositionMenu = () => {
 	btnSets[0] = new ButtonSet(["\ue050", "\ue062", "\ue050    \ue062"], SCREEN_WIDTH * 0.39, SCREEN_HEIGHT * 0.3, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, "Bravura");
 	btnSets[1] = new ButtonSet(["C", "D", "E", "F", "G", "A", "B", "C↑"], SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.55, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, "Arial");
 	btnSets[2] = new ButtonSet(["F↓", "G↓", "A↓", "B↓", "C", "D", "E", "F"], SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.8, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, "Arial");
+	btnSets[1].increase(-0.25);
+	btnSets[2].increase(-0.25);
 
 	btnSets[2].deactivate();
 
@@ -335,11 +354,12 @@ const createIntervalMenu = async() => {
 	await document.fonts.load(SCORE_FONT_SIZE + "px Bravura");
 	
 	const btnSets = [];
+	t = btnSets;
 	
 	btnSets[0] = new ButtonSet(["\ue050", "\ue062", "\ue050    \ue062"], SCREEN_WIDTH * 0.39, SCREEN_HEIGHT * 0.3, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, "Bravura");
 	btnSets[1] = new ButtonSet(["Sekunde", "Terz", "Quarte", "Quinte", "Sexte", "Septime", "Oktave"], SCREEN_WIDTH * 0.16, SCREEN_HEIGHT * 0.5, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, "Arial");
 	btnSets[2] = new ButtonSet(["\ue261", "\ue262", "\ue260", "\ue262  \ue260"], SCREEN_WIDTH * 0.335, SCREEN_HEIGHT * 0.7, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, "Bravura");
-	btnSets[2].increase(0.75);
+	
 
 	const backBtn = new GuiButton("", SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, BACK_BUTTON_IMAGE_COORDS);
 	const playBtn = new GuiButton("PLAY!", SCREEN_WIDTH * 0.9, SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, NORMAL_BUTTON_IMAGE_COORDS);
