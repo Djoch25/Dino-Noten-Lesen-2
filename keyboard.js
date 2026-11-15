@@ -2,8 +2,8 @@ class Keyboard {
   constructor(input) {
     this.input = input;
 
-    this.w = screen.width;
-    this.h = screen.height;
+    this.w = SCREEN_WIDTH;
+    this.h = SCREEN_HEIGHT;
 
     this.btnW = this.w / 15;
     this.btnH = this.btnW;
