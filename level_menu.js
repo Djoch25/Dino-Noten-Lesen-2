@@ -18,12 +18,9 @@ const createArcadiaMenu = () => {
 
 	document.body.appendChild(pswInput);
 
-	mainCtx.fillText("test", 50, 50);
 	try {
 	const keyboard = new Keyboard(pswInput);
-	} catch (err) {
-		mainCtx.fillText(err, 100, 100);
-	}
+	
 	const backBtn = new GuiButton("", SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, BACK_BUTTON_IMAGE_COORDS);
 	const forwardBtn = new GuiButton("", SCREEN_WIDTH * 0.9, SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, FORWARD_BUTTON_IMAGE_COORDS);
 	const skipBtn = new GuiButton("SKIP", SCREEN_WIDTH * 0.9, SCREEN_HEIGHT * 0.3, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, NORMAL_BUTTON_IMAGE_COORDS);
@@ -82,6 +79,10 @@ const createArcadiaMenu = () => {
 
 		createLevelMenu(1);
 	});
+
+	} catch (err) {
+		mainCtx.fillText(err, 50, 50);
+	}
 }
 
 const createLevelMenu = (level) => {
