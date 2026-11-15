@@ -83,7 +83,7 @@ class GuiButton {
 		this.btn.textContent = this.text;
 		this.btn.style.color = "#44aa33";
 		this.btn.style.fontFamily = "Helvetica";
-		this.btn.style.fontSize = SCORE_FONT_SIZE * (2 / 3) + "px";
+		this.btn.style.fontSize = GuiButton.getFontSize(this.text, this.w) + "px"; //SCORE_FONT_SIZE * (2 / 3) + "px";
 		this.btn.style.fontWeight = "bold";
 		this.btn.style.whiteSpace = "pre-line";
 
@@ -133,6 +133,25 @@ class GuiButton {
 
 	static destroy(...btns) {
 		for (const btn of btns) btn.btn.remove();
+	}
+
+	static getFontSize(text, width) {
+		if (text == "") return null;
+
+		const cnv = document.createElement("canvas");
+		const ctx = cnv.getContext("2d");
+		const fontFamily = "Helvetica";
+		let fontSize = 20;
+		const btnWidth = width * 0.55;
+		let textWidth = 0;
+
+		do {
+			fontSize++;
+			ctx.font = fontSize + "px " + fontFamily;
+			textWidth = ctx.measureText(text).width;
+		} while (textWidth < btnWidth);
+
+		return fontSize;
 	}
 
 	addEventListener(event, fn) {
@@ -207,11 +226,20 @@ class ButtonSet {
 		this.active = true;
 		this.btnOnIndex = 0;
 
+		let maxName = "";
+		for (let i = 0; i < this.names.length; i++) {
+			if (this.names[i].length > maxName.length) {
+				maxName = this.names[i];
+			}
+		}
+
+		const fontSize = GuiButton.getFontSize(maxName, this.w);
+
 		for (let i = 0; i < this.names.length; i++) {
 			const x = this.x + this.w * 1.1 * i;
 			this.btns[i] = new SelectableButton(this.names[i], x, this.y, this.w, this.h, document.body);
 
-			this.btns[i].btn.style.font = (this.w * 0.25) + "px " + this.font;
+			this.btns[i].btn.style.font = fontSize + "px " + this.font;
 			this.btns[i].btn.style.display = "flex";
   			this.btns[i].btn.style.justifyContent = "center";
   			this.btns[i].btn.style.alignItems = "center";
@@ -231,7 +259,7 @@ class ButtonSet {
 	}
 
 	increase(rate) {
-		for (let btn of this.btns) btn.btn.style.font = ((this.w * 0.25) * (1 + rate)) + "px Bravura";	
+		for (let btn of this.btns) btn.btn.style.fontSize = (parseInt(btn.btn.style.fontSize) * (1 + rate)) + "px";	
 	}
 
 	breakPosition(pos) {
