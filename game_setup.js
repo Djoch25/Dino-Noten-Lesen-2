@@ -12,7 +12,7 @@ const setupGame = async (level) => {
 
 	if (level.category === "arcadia") drawStars(mainCtx, starNumber, WIDTH * 0.55, HEIGHT * 0.015);
 	
-	backBtn = new GuiButton("", WIDTH * 0.1 / SCALE, HEIGHT * 0.1 / SCALE, 100, 100, document.body, BACK_BUTTON_IMAGE_COORDS);
+	backBtn = new GuiButton("", SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.1, 100, 100, document.body, BACK_BUTTON_IMAGE_COORDS);
 	backBtn.addEventListener("click", () => {
 		cancelAnimationFrame(ID);
 		mainCtx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -40,7 +40,7 @@ const setupGame = async (level) => {
 		LEVEL.clear();
 	});
 
-	pauseBtn = new TwoSidesGuiButton("", WIDTH * 0.2 / SCALE, HEIGHT * 0.1 / SCALE, 100, 100, document.body, PAUSE_BUTTON_IMAGE_COORDS, PLAY_BUTTON_IMAGE_COORDS);
+	pauseBtn = new TwoSidesGuiButton("", SCREEN_WIDTH * 0.2, SCREEN_HEIGHT * 0.1, 100, 100, document.body, PAUSE_BUTTON_IMAGE_COORDS, PLAY_BUTTON_IMAGE_COORDS);
 	pauseBtn.addEventListener("click", (event) => {
 		pauseBtn.toggle();
 
