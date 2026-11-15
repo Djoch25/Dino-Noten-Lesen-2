@@ -1,3 +1,5 @@
+let temp;
+
 let performativeStartTime = performance.now();
 
 let SCALE;
