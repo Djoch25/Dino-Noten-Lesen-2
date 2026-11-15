@@ -20,6 +20,9 @@ class Keyboard {
 
     this.btns = [];
 
+    //test
+    const testBtn = new GuiButton(letters[0], 100, 100, 100, 100, document.body, NORMAL_BUTTON_IMAGE_COORDS);
+    
     //prima riga
     for (let i = 0; i < 10; i++) {
       this.btns[i] = new GuiButton(letters[i], firstKeyLeft + i * this.btnW, this.h - this.btnH * 2.5, this.btnW, this.btnH, document.body, NORMAL_BUTTON_IMAGE_COORDS);
