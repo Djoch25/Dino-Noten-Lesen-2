@@ -18,9 +18,6 @@ const createArcadiaMenu = () => {
 
 	document.body.appendChild(pswInput);
 
-	mainCtx.fillText("A", 50, 50);
-
-	try {
 	const keyboard = new Keyboard(pswInput);
 	
 	const backBtn = new GuiButton("", SCREEN_WIDTH * 0.1, SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.1, SCREEN_WIDTH * 0.1, document.body, BACK_BUTTON_IMAGE_COORDS);
@@ -81,10 +78,6 @@ const createArcadiaMenu = () => {
 
 		createLevelMenu(1);
 	});
-
-	} catch (err) {
-		mainCtx.fillText(err, 50, 50);
-	}
 }
 
 const createLevelMenu = (level) => {
