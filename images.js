@@ -130,7 +130,7 @@ const STAR_ROW_WIDTH = 375;
 
 const drawStars = (ctx, n, x, y) => {
 	for (let i = 0; i < 5; i++) {
-		if (i >= n) ctx.drawImage(stars, ...STAR_OFF_COORDS_1, x + i * 75, y, 75, 75);
-		else ctx.drawImage(stars, ...STAR_ON_COORDS, x + i * 75, y, 75, 75);
+		if (i >= n) ctx.drawImage(stars, ...STAR_OFF_COORDS_1, x + (i * 75) * SCALE, y * SCALE, 75 * SCALE, 75 * SCALE);
+		else ctx.drawImage(stars, ...STAR_ON_COORDS, x + (i * 75) * SCALE, y * SCALE, 75 * SCALE, 75 * SCALE);
 	}
 }
