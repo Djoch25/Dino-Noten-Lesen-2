@@ -43,7 +43,7 @@ const createDinoOverviewRoom = async() => {
 	const spacing = SCREEN_HEIGHT * 0.2;
 	let i = 0;
 	
-	btns.push(new GuiButton("ARCADIA", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS, 0.9));
+	btns.push(new GuiButton("ABENTEUER", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS, 0.9));
 	btns.push(new GuiButton("TRAINING", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS, 0.9));
 	btns.push(new GuiButton("WIE\nFUNKTIONIERT", btnX, btnY + i++ * spacing, btnW * 2, btnW, document.body, NORMAL_BUTTON_IMAGE_COORDS, 0.7));
 	btns.push(new GuiButton("", btnX, btnY + i++ * spacing, btnW, btnW, document.body, SETTING_BUTTON_IMAGE_COORDS));
