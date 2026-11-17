@@ -1,7 +1,7 @@
 const createArcadiaMenu = () => {
 	mainCtx.fillStyle = "#ffff33";
 	mainCtx.font = 100 * SCALE + "px Arial";
-	mainCtx.fillText("ARCADIA MODE", WIDTH * 0.5, HEIGHT * 0.15);
+	mainCtx.fillText("ABENTEUER MODE", WIDTH * 0.5, HEIGHT * 0.15);
 	mainCtx.font = 40 * SCALE + "px Arial";
 	mainCtx.fillText("LEVEL PASSWORT HINZUFÜGEN:", WIDTH * 0.5, HEIGHT * 0.25);
 
