@@ -147,12 +147,12 @@ const mainLoop = () => {
 	animeCtx.clearRect(dino.x - 50, dino.y - 50, dino.w + 100, dino.h + 100);
 	dino.draw();
 
-	const midiDim = animeCtx.measureText(currentMidiPitch);
-	const midiW2 = midiDim.width / 2;
-	const midiH2 = SCORE_FONT_SIZE / 2;
+	//const midiDim = animeCtx.measureText(currentMidiPitch);
+	//const midiW2 = midiDim.width;
+	//const midiH2 = SCORE_FONT_SIZE / 2;
 		
-	mainCtx.clearRect(TILE_SIZE * 7 - midiW2 * 2, TILE_SIZE * 0.5 - midiH2, midiW2 * 4, midiH2 * 2);
-	mainCtx.fillText(currentMidiPitch, TILE_SIZE * 7 - midiW2, TILE_SIZE * 0.5 + midiH2);
+	//mainCtx.clearRect(TILE_SIZE * 7 - midiW2 * 2, TILE_SIZE * 0.5 - midiH2, midiW2 * 4, midiH2 * 2);
+	//mainCtx.fillText(currentMidiPitch, TILE_SIZE * 7 - midiW2, TILE_SIZE * 0.5 + midiH2);
 	
 }
 
