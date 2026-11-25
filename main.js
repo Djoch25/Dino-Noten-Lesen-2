@@ -139,7 +139,13 @@ const mainLoop = () => {
 
 		animeCtx.fillStyle = level.color;
 		animeCtx.fillText(punteggioTotale, TILE_SIZE * 5.5 - punteggioW2, TILE_SIZE * 0.5 + punteggioH2);
-		animeCtx.fillText(currentMidiPitch, TILE_SIZE * 6, TILE_SIZE * 0.5 + punteggioH2);
+
+		const midiDim = animeCtx.measureText(currentMidiPitch);
+		const midiW2 = midiDim.width / 2;
+		const midiH2 = SCORE_FONT_SIZE / 2;
+		
+		animeCtx.clearRect(TILE_SIZE * 6 - midiW2, TILE_SIZE * 0.5 + midiH2, midiW2 * 2, midiH2 * 2);
+		animeCtx.fillText(currentMidiPitch, TILE_SIZE * 6 - midiW2, TILE_SIZE * 0.5 + midiH2);
 
 		prevPunteggioTotale = punteggioTotale;
 	}
