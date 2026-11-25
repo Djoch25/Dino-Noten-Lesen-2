@@ -151,8 +151,8 @@ const mainLoop = () => {
 	const midiW2 = midiDim.width / 2;
 	const midiH2 = SCORE_FONT_SIZE / 2;
 		
-	animeCtx.clearRect(TILE_SIZE * 7 - midiW2 * 2, TILE_SIZE * 0.5 + midiH2, midiW2 * 4, midiH2 * 2);
-	animeCtx.fillText(currentMidiPitch, TILE_SIZE * 7 - midiW2, TILE_SIZE * 0.5 + midiH2);
+	mainCtx.clearRect(TILE_SIZE * 7 - midiW2 * 2, TILE_SIZE * 0.5 + midiH2, midiW2 * 4, midiH2 * 2);
+	mainCtx.fillText(currentMidiPitch, TILE_SIZE * 7 - midiW2, TILE_SIZE * 0.5 + midiH2);
 	
 }
 
