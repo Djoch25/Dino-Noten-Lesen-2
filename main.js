@@ -140,18 +140,20 @@ const mainLoop = () => {
 		animeCtx.fillStyle = level.color;
 		animeCtx.fillText(punteggioTotale, TILE_SIZE * 5.5 - punteggioW2, TILE_SIZE * 0.5 + punteggioH2);
 
-		const midiDim = animeCtx.measureText(currentMidiPitch);
-		const midiW2 = midiDim.width / 2;
-		const midiH2 = SCORE_FONT_SIZE / 2;
 		
-		animeCtx.clearRect(TILE_SIZE * 7 - midiW2 * 2, TILE_SIZE * 0.5 + midiH2, midiW2 * 4, midiH2 * 2);
-		animeCtx.fillText(currentMidiPitch, TILE_SIZE * 7 - midiW2, TILE_SIZE * 0.5 + midiH2);
-
 		prevPunteggioTotale = punteggioTotale;
 	}
 
 	animeCtx.clearRect(dino.x - 50, dino.y - 50, dino.w + 100, dino.h + 100);
 	dino.draw();
+
+	const midiDim = animeCtx.measureText(currentMidiPitch);
+	const midiW2 = midiDim.width / 2;
+	const midiH2 = SCORE_FONT_SIZE / 2;
+		
+	animeCtx.clearRect(TILE_SIZE * 7 - midiW2 * 2, TILE_SIZE * 0.5 + midiH2, midiW2 * 4, midiH2 * 2);
+	animeCtx.fillText(currentMidiPitch, TILE_SIZE * 7 - midiW2, TILE_SIZE * 0.5 + midiH2);
+	
 }
 
 
