@@ -139,6 +139,7 @@ const mainLoop = () => {
 
 		animeCtx.fillStyle = level.color;
 		animeCtx.fillText(punteggioTotale, TILE_SIZE * 5.5 - punteggioW2, TILE_SIZE * 0.5 + punteggioH2);
+		animeCtx.fillText(currentMidiPitch, TILE_SIZE * 6, TILE_SIZE * 0.5 + punteggioH2);
 
 		prevPunteggioTotale = punteggioTotale;
 	}
